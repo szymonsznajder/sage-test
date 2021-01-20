@@ -2,6 +2,10 @@ body {
   background-color: rgb(219, 248, 255);
 }
 
+.main-wrapper {
+  background-image: url("../images/bg2.jpg");
+}
+
 .banner {
   background-color: rgb(205, 235, 255);
 
@@ -9,16 +13,12 @@ body {
     display: flex;
     flex-wrap: wrap;
 
-    .logo {
-      padding: 20px;
-
-      .brand {
-        font-size: 24px;
-      }
+    .logo img {
+      max-width: 120px;
     }
 
     .nav-primary {
-      padding: 15px 0 0;
+      padding: 35px 0 0 30px;
     }
   }
 }
