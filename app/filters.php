@@ -17,6 +17,10 @@ add_filter('body_class', function (array $classes) {
     if (display_sidebar()) {
         $classes[] = 'sidebar-primary';
     }
+    /** Add class if sidebar is active */
+    // if (display_sidebar()) {
+    //     $classes[] = 'bg-image';
+    // }
 
     /** Clean up class names for custom templates */
     $classes = array_map(function ($class) {
@@ -89,3 +93,24 @@ add_filter('comments_template', function ($comments_template) {
 
     return $comments_template;
 }, 100);
+
+/**
+ * Display sidebar
+ */
+add_filter('sage/display_sidebar', function ($display) {
+    static $display;
+
+    isset($display) || $display = in_array(true, [
+        // The sidebar will be displayed if any of the following return true
+        is_home(),
+        is_single(),
+        is_search(),
+        is_archive()
+    ]);
+
+    // example if you want to target a particular custom page template
+    if (basename(get_page_template()) == "template-full-width.blade.php")
+        $display = false;
+
+    return $display;
+});

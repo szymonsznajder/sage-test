@@ -1,30 +1,37 @@
 body {
-  background-color: rgb(219, 248, 255);
+  background-color: #16182f;
+  font-family: "Open Sans", sans-serif;
 }
 
-.main-wrapper {
-  background-image: url("../images/bg2.jpg");
+.bg-image {
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
+
+  img {
+    width: 100vw;
+  }
+}
+
+.slider-banner {
+  padding: 0 0 40px 0;
+  margin: 0;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .banner {
-  background-color: rgb(205, 235, 255);
+  background-color: #111428;
 
   .container {
     display: flex;
     flex-wrap: wrap;
 
-    .logo img {
-      max-width: 120px;
-    }
-
     .nav-primary {
       padding: 35px 0 0 30px;
     }
   }
-}
-
-.content-szymon {
-  border: 20px solid darkgreen;
-  background-color: red;
-  padding: 40px;
 }

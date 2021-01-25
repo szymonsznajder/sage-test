@@ -90,3 +90,6 @@ Container::getInstance()
             'view' => require dirname(__DIR__).'/config/view.php',
         ]);
     }, true);
+
+// Add feature image for single posts
+add_theme_support( 'post-thumbnails' );

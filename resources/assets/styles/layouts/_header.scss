@@ -5,3 +5,26 @@
 .banner .nav a {
   @extend .nav-link;
 }
+
+.mobile-nav .hamburger {
+  display: block;
+}
+
+.mobile-nav .nav {
+  display: none;
+}
+
+.mobile-nav.show-nav .nav {
+  display: block;
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .mobile-nav .hamburger {
+    display: none;
+  }
+
+  .menu-main-container {
+    display: block;
+  }
+}

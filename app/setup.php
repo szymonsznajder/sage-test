@@ -13,6 +13,7 @@ use Roots\Sage\Template\BladeProvider;
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
     wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
+    wp_enqueue_style( 'twd-googlefonts', 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=PT+Serif:wght@400;700&display=swap', array(), null );
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -32,6 +33,16 @@ add_action('after_setup_theme', function () {
     add_theme_support('soil-nav-walker');
     add_theme_support('soil-nice-search');
     add_theme_support('soil-relative-urls');
+
+    /** 
+     * 
+     * Custom logo support
+    */
+    add_theme_support( 'custom-logo', array(
+        'height'        =>  110,
+        'width'         =>  135,
+        'header-text'   =>  array ('site-title', 'site,description'),
+    ));
 
     /**
      * Enable plugins to manage the document title
@@ -93,8 +104,12 @@ add_action('widgets_init', function () {
         'id'            => 'sidebar-footer'
     ] + $config);
     register_sidebar([
-        'name'          => __('Panel', 'sage'),
+        'name'          => __('Panel-footer', 'sage'),
         'id'            => 'panel-footer'
+    ] + $config);
+    register_sidebar([
+        'name'          => __('Background Image', 'sage'),
+        'id'            => 'bg-image'
     ] + $config);
 });
 
@@ -136,3 +151,38 @@ add_action('after_setup_theme', function () {
         return "<?= " . __NAMESPACE__ . "\\asset_path({$asset}); ?>";
     });
 });
+
+
+
+acf_add_local_field_group([
+    'key' => 'group_1',
+    'title' => 'My Group',
+    'fields' => [
+        [
+            'key' => 'field_title',
+            'label' => 'Title',
+            'name' => 'title',
+            'type' => 'text',
+        ],
+        [
+            'key' => 'field_description',
+            'label' => 'Description',
+            'name' => 'description',
+            'type' => 'textarea',
+        ]
+    ],
+    'location' => [
+        [
+            [
+                'param' => 'post_type',
+                'operator' => '==',
+                'value' => 'post',
+            ],
+        ],
+    ],
+    'menu_order' => 0,
+    'position' => 'normal',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+]);
